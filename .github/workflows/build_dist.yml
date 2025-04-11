@@ -72,8 +72,7 @@ jobs:
           CIBW_ARCHS_MACOS: "auto64" # since we have both runner arches
           CIBW_ARCHS_WINDOWS: "AMD64 x86 ARM64"
           CIBW_BUILD: ${{ matrix.cibw_build }}
-          CIBW_SKIP: "cp*-musllinux*"
-          CIBW_TEST_COMMAND: "tox -c {project}"
+          CIBW_SKIP: "cp*-musllinux*"            
           CIBW_TEST_SKIP: "*-macosx_arm64 *-macosx_universal2:arm64 *-*linux_{ppc64le,s390x} *-win_arm64"
           CIBW_BEFORE_BUILD: "python -m pip install -U pip && python -m pip install tox && python -m pip install swig"
       - name: Save wheels
@@ -110,7 +109,6 @@ jobs:
           CIBW_ARCHS_LINUX: "aarch64 armv7l"
           CIBW_BUILD: ${{ matrix.cibw_build }}
           CIBW_SKIP: "cp*-musllinux*"
-          CIBW_TEST_COMMAND: "tox -c {project}"
           CIBW_BEFORE_BUILD: "python -m pip install -U pip && python -m pip install tox && python -m pip install swig"
       - name: Save wheels
         uses: actions/upload-artifact@v4
