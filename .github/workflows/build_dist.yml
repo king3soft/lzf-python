@@ -75,7 +75,7 @@ jobs:
           CIBW_SKIP: "cp*-musllinux*"
           CIBW_TEST_COMMAND: "tox -c {project}"
           CIBW_TEST_SKIP: "*-macosx_arm64 *-macosx_universal2:arm64 *-*linux_{ppc64le,s390x} *-win_arm64"
-          CIBW_BEFORE_BUILD: "python -m pip install -U pip && python -m pip install tox"
+          CIBW_BEFORE_BUILD: "python -m pip install -U pip && python -m pip install tox && python -m pip install swig"
       - name: Save wheels
         uses: actions/upload-artifact@v4
         with:
@@ -111,7 +111,7 @@ jobs:
           CIBW_BUILD: ${{ matrix.cibw_build }}
           CIBW_SKIP: "cp*-musllinux*"
           CIBW_TEST_COMMAND: "tox -c {project}"
-          CIBW_BEFORE_BUILD: "python -m pip install -U pip && python -m pip install tox"
+          CIBW_BEFORE_BUILD: "python -m pip install -U pip && python -m pip install tox && python -m pip install swig"
       - name: Save wheels
         uses: actions/upload-artifact@v4
         with:
