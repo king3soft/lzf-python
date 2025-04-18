@@ -60,6 +60,9 @@ class _SwigNonDynamicMeta(type):
 
 BLOCK_BYTES = _lzf.BLOCK_BYTES
 
-def lzf_decompressF(inputFile, outputFile):
-    return _lzf.lzf_decompressF(inputFile, outputFile)
+def lzf_decompress(outFp, inpFp):
+    return _lzf.lzf_decompress(outFp, inpFp)
+
+def lzf_compress(outFp, inpFp):
+    return _lzf.lzf_compress(outFp, inpFp)
 

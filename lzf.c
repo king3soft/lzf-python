@@ -1,4 +1,5 @@
 #include "lzf.h"
+#include <limits.h>
 
 size_t write_int(FILE* fp, int i) {
     return fwrite(&i, sizeof(i), 1, fp);
@@ -50,11 +51,11 @@ void lzf_compress(FILE* outFp, FILE* inpFp)
         inpBufIndex = (inpBufIndex + 1) % 2;
     }
 
-    write_int(outFp, 0);
+    write_int(outFp, INT_MAX);
 }
 
-//BLOCK_BYTES = 1024 * 64,
-void lzf_decompress(FILE* outFp, FILE* inpFp)
+
+int lzf_decompress(FILE* outFp, FILE* inpFp)
 {
     assert(outFp != NULL); assert(inpFp != NULL);
 
@@ -72,6 +73,9 @@ void lzf_decompress(FILE* outFp, FILE* inpFp)
 
         {
             const size_t readCount0 = read_int(inpFp, &cmpBytes);
+            if(readCount0 != 1 && cmpBytes == INT_MAX) {
+                return 1;
+            }
             if(readCount0 != 1 || cmpBytes <= 0) {
                 break;
             }
@@ -94,6 +98,7 @@ void lzf_decompress(FILE* outFp, FILE* inpFp)
 
         decBufIndex = (decBufIndex + 1) % 2;
     }
+    return 0;
 }
 
 /*
@@ -188,13 +193,3 @@ int main(int argc, char* argv[])
     return 0;
 }
 */
-
-void lzf_decompressF(const char* inputFile, const char* outputFile) {
-    FILE* inpFp = fopen(inputFile, "rb");
-    FILE* outFp = fopen(outputFile, "wb");
-
-    lzf_decompress(outFp, inpFp);
-
-    fclose(outFp);
-    fclose(inpFp);
-}
