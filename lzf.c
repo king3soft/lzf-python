@@ -73,7 +73,7 @@ int lzf_decompress(FILE* outFp, FILE* inpFp)
 
         {
             const size_t readCount0 = read_int(inpFp, &cmpBytes);
-            if(readCount0 != 1 && cmpBytes == INT_MAX) {
+            if(cmpBytes == INT_MAX) {
                 return 1;
             }
             if(readCount0 != 1 || cmpBytes <= 0) {
