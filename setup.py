@@ -19,7 +19,7 @@ lzf_module = Extension(
 
 setup(
     name='lzf-python',
-    version='1.0.3',
+    version='1.0.4',
     description='Python bindings for LZF compression library',
     author='Author',
     author_email='author@example.com',
