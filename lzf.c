@@ -193,3 +193,14 @@ int main(int argc, char* argv[])
     return 0;
 }
 */
+
+int lzf_decompressF(const char* inputFile, const char* outputFile) {
+    FILE* inpFp = fopen(inputFile, "rb");
+    FILE* outFp = fopen(outputFile, "wb");
+
+    int ret = lzf_decompress(outFp, inpFp);
+
+    fclose(outFp);
+    fclose(inpFp);
+    return ret;
+}

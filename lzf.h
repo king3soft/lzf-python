@@ -12,9 +12,7 @@ enum {
 #ifdef __cplusplus
 extern "C" {
 #endif
-int lzf_decompress(FILE* outFp, FILE* inpFp);
-void lzf_compress(FILE* outFp, FILE* inpFp);
-
+int lzf_decompressF(const char* inputFile, const char* outputFile);
 #ifdef __cplusplus
 }
 #endif
